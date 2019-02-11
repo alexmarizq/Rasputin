@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VistaPersonaController">
+   <children>
+      <SplitPane dividerPositions="0.2259970457902511" layoutX="200.0" layoutY="102.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="tablaPersonas" layoutX="-12.0" layoutY="69.0" prefHeight="462.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="nombreColumn" editable="false" prefWidth="131.0" text="Producto" />
+                      <TableColumn fx:id="apellidosColumn" minWidth="0.0" prefWidth="118.0" text="ID" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background">
+               <children>
+                  <GridPane layoutX="10.0" layoutY="57.0" prefHeight="426.0" prefWidth="336.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="264.0" minWidth="10.0" prefWidth="171.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="212.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label prefHeight="55.0" prefWidth="230.0" text="Nombre">
+                           <font>
+                              <Font name="Calibri" size="9.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="55.0" prefWidth="200.0" text="Generación" textAlignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="65.0" prefWidth="200.0" text="Fabricante" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="55.0" prefWidth="223.0" text="Código de Barras" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="57.0" prefWidth="232.0" text="Unidades en Stock" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="124.0" text="Precio" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Calibri" size="10.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nombreLabel" prefHeight="82.0" prefWidth="240.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="apellidosLabel" prefHeight="60.0" prefWidth="250.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="direccionLabel" prefHeight="65.0" prefWidth="256.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="ciudadLabel" prefHeight="93.0" prefWidth="281.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="codigoPostalLabel" prefHeight="81.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="fechaDeNacimientoLabel" prefHeight="49.0" prefWidth="196.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <HBox layoutX="236.0" layoutY="339.0" spacing="10.0" />
+                  <Label accessibleRole="BUTTON" alignment="TOP_LEFT" cache="true" cacheHint="SPEED" contentDisplay="CENTER" depthTest="ENABLE" layoutX="10.0" prefHeight="55.0" prefWidth="200.0" styleClass="label-header" text="Detalles" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <font>
+                        <Font name="Calibri" size="21.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Label>
+                  <Button layoutX="10.0" layoutY="558.0" mnemonicParsing="false" onAction="#crearPersona" text="Nuevo" />
+                  <Button layoutX="124.0" layoutY="558.0" mnemonicParsing="false" onAction="#editarPersona" text="Editar" />
+                  <Button layoutX="236.0" layoutY="558.0" mnemonicParsing="false" onAction="#borrarPersona" text="Borrar" />
+                  <Button layoutX="347.0" layoutY="558.0" mnemonicParsing="false" onAction="#generarEtiqueta" text="Etiqueta" />
+                  <Pane layoutX="398.0" layoutY="61.0" prefHeight="285.0" prefWidth="255.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

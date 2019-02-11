@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="GestorInventario.jnlp">
+  <information>
+    <title>GestorInventario</title>
+    <vendor>aulaweb2</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="GestorInventario.jar" size="29359" download="eager" />
+    <jar href="lib\jsch-0.1.55.jar" size="280681" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
+    <jar href="lib\ojdbc7.jar" size="3397734" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="GestorInventario" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="Controller.LibretaDirecciones"  name="GestorInventario" />
+  <update check="always"/>
+</jnlp>
