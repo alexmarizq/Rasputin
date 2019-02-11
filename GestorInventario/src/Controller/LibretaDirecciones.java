@@ -76,7 +76,7 @@ public class LibretaDirecciones extends Application {
         this.escenarioPrincipal.getIcons().add(new Image("file:img/libretaDirecciones.png"));
 
         //Establezco conexión con la base de datos local
-        conexionSql = new ConexionSql("jdbc:mysql://104.248.240.20:3306/kraa?useSSL=false", "root", "Root1234#");
+        //conexionSql = new ConexionSql("jdbc:mysql://104.248.240.20:3306/kraa?useSSL=false", "root", "Root1234#");
 
         //Establezco la conexión SSH
         ConexionSsh conexionSsh = new ConexionSsh();
@@ -84,7 +84,8 @@ public class LibretaDirecciones extends Application {
         //Establezco conexión con la base de datos local
         //conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:3306/dam?useSSL=false", "dam", "dam");
         //Establezco conexión con la base de datos remota
-        conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:" + conexionSsh.puertoAsignado + "/dam?useSSL=false", "dam", "dam");
+        //conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:" + conexionSsh.puertoAsignado + "/dam?useSSL=false", "root", "Root1234#");
+        
         //Inicializo el layout principal
         initLayoutPrincipal();
 

@@ -146,4 +146,8 @@ public class VistaPersonaController {
             alerta.showAndWait();
         }
     }
+    
+     public void generarEtiqueta(){
+        
+    }
 }

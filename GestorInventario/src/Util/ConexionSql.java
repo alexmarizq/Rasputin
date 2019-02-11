@@ -52,8 +52,8 @@ public class ConexionSql {
             String ciudad = rs.getString("ciudad");
             int codigoPostal = rs.getInt("codigoPostal");
             java.sql.Date fechaDeNacimiento = rs.getDate("fechaDeNacimiento");
-            Persona persona = new Persona(nombre, apellidos, direccion, ciudad, codigoPostal, fechaDeNacimiento.toLocalDate());
-            personas.add(persona);
+            //Persona persona = new Persona(nombre, apellidos, direccion, ciudad, codigoPostal, fechaDeNacimiento.toLocalDate());
+            //personas.add(persona);
         }
         rs.close();
         stmnt.close();
