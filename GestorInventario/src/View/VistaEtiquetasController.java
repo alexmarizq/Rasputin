@@ -7,21 +7,35 @@ package View;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javax.swing.JButton;
 
 /**
  * FXML Controller class
  *
  * @author Rober
  */
-public class VistaEtiquetasController implements Initializable {
+public class VistaEtiquetasController{
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    @FXML
+    private TextField numeroCopias;
     
+    private Stage escenarioEdicion;
+    
+    @FXML
+    private void initialize() {
+    }  
+
+    @FXML
+    private void cancelar() {
+        escenarioEdicion.close();
+    }
+    
+    @FXML
+    private void imprimir(){
+        System.out.println(numeroCopias.getText());
+    }
 }

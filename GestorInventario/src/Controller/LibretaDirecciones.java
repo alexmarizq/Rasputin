@@ -6,11 +6,11 @@
 package Controller;
 
 import Model.Empaquetador;
-import Model.Persona;
+import Model.Consola;
 import Util.ConexionSql;
 import Util.ConexionSsh;
-import View.EditarPersonaController;
-import View.VistaPersonaController;
+import View.EditarConsolaController;
+import View.VistaConsolaController;
 import View.VistaPrincipalController;
 import com.jcraft.jsch.JSchException;
 import java.io.File;
@@ -29,7 +29,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import static javafx.scene.input.KeyCode.F;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -49,13 +48,7 @@ public class LibretaDirecciones extends Application {
 
     //Datos de ejemplo
     public LibretaDirecciones() {
-
         //datosPersona.add(new Persona("Guillermo", "Felipee", "Calle piruleta", "Madrid", 28400, LocalDate.of(1, 1, 1998)));
-        datosPersona.add(new Persona("Juan", "Pérez Martínez"));
-        datosPersona.add(new Persona("Andrea", "Chenier López"));
-        datosPersona.add(new Persona("Emilio", "González Pla"));
-        datosPersona.add(new Persona("Mónica", "de Santos Sánchez"));
-
     }
 
     //Método para devolver los datos como lista observable de personas
@@ -144,7 +137,7 @@ public class LibretaDirecciones extends Application {
         layoutPrincipal.setCenter(vistaPersona);
 
         //Doy acceso al controlador VistaPersonaCOntroller a LibretaDirecciones
-        VistaPersonaController controller = loader.getController();
+        VistaConsolaController controller = loader.getController();
         controller.setLibretaDirecciones(this);
 
     }
@@ -155,7 +148,7 @@ public class LibretaDirecciones extends Application {
     }
 
     //Vista editarPersona
-    public boolean muestraEditarPersona(Persona persona) {
+    public boolean muestraEditarPersona(Consola persona) {
 
         //Cargo la vista persona a partir de VistaPersona.fxml
         FXMLLoader loader = new FXMLLoader();
@@ -177,7 +170,7 @@ public class LibretaDirecciones extends Application {
         escenarioEdicion.setScene(escena);
 
         //Asigno el escenario de edición y la persona seleccionada al controlador
-        EditarPersonaController controller = loader.getController();
+        EditarConsolaController controller = loader.getController();
         controller.setEscenarioEdicion(escenarioEdicion);
         controller.setPersona(persona);
 
@@ -284,7 +277,7 @@ public class LibretaDirecciones extends Application {
         }
 
         //Guardar en la base de datos
-        conexionSql.putPersonas(datosPersona);
+        conexionSql.putConsola(datosPersona);
     }
 
 }

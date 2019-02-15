@@ -24,7 +24,7 @@ public class ConexionSsh {
     private static Connection conexion = null;
     String hostSsh = "104.248.240.20";
     String usuarioSsh = "root";
-    int puertoSsh = 22;
+    int puertoSsh = 990;
     /* en el caso de CEU, usa el 990 */
     String keySsh = "id_rsa.pem";
     String hostRemoto = "127.0.0.1";
@@ -35,21 +35,14 @@ public class ConexionSsh {
     public ConexionSsh() {
 
         try {
-            System.out.println("1");
             java.util.Properties config = new java.util.Properties();
-            System.out.println("2");
             JSch jsch = new JSch();
-            System.out.println("3");
             //Inicio sesión ssh
             sesion = jsch.getSession(usuarioSsh, hostSsh, puertoSsh);
-            System.out.println("4");
             jsch.addIdentity(keySsh);
-            System.out.println("5");
             config.put("StrictHostKeyChecking", "no");
-            System.out.println("6");
             config.put("ConnectionAttempts", "3");
             sesion.setConfig(config);
-            System.out.println("antes");
             sesion.connect();
             System.out.println("SSH conectado");
             

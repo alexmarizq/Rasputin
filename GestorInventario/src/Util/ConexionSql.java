@@ -5,7 +5,7 @@
  */
 package Util;
 
-import Model.Persona;
+import Model.Consola;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +44,7 @@ public class ConexionSql {
         Statement stmnt = conexion.createStatement();
         ResultSet rs = stmnt.executeQuery("SELECT * FROM personas");
 
-        List<Persona> personas = new ArrayList<>();
+        List<Consola> personas = new ArrayList<>();
         while (rs.next()) {
             String nombre = rs.getString("nombre");
             String apellidos = rs.getString("apellidos");
@@ -61,7 +61,7 @@ public class ConexionSql {
 
     }
     
-    public void putPersonas(List<Persona> personas) throws SQLException{
+    public void putConsola(List<Consola> consolas) throws SQLException{
         
         
         //Borro todas
@@ -69,16 +69,19 @@ public class ConexionSql {
         stmnt.executeUpdate("DELETE FROM personas");
         stmnt.close();
         //Preparo el statement
-        String query = "INSERT INTO personas (nombre,apellidos,direccion,ciudad,codigoPostal,fechaDeNacimiento) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO personas (nombre,marca,descripcion,precio,stock,codigBarras,imagen,generacion) VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = conexion.prepareStatement(query);
         //Añado cada persona
-        for (Persona persona : personas){
-            ps.setString(1, persona.getNombre());
-            ps.setString(2, persona.getApellidos());
-            ps.setString(3, persona.getDireccion());
-            ps.setString(4, persona.getCiudad());
-            ps.setInt(5, persona.getCodigoPostal());
-            ps.setDate(6, java.sql.Date.valueOf(persona.getFechaDeNacimiento()));
+        for (Consola consola : consolas){
+            //EDITAR ORDEN
+            ps.setString(1, consola.getNombre());
+            ps.setString(2, consola.getMarca());
+            ps.setString(3, consola.getCodigoBarras());
+            ps.setString(4, String.valueOf(consola.getPrecio()));
+            ps.setString(5, consola.getGeneracion());
+            ps.setString(6, String.valueOf(consola.getStock()));
+            ps.setDate(7, java.sql.Date.valueOf(consola.getFechaAlta()));
+            ps.setDate(8, java.sql.Date.valueOf(consola.getFechaUltimaActualizacion()));
             ps.execute();
         }
         ps.close();

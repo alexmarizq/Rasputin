@@ -8,14 +8,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Empaquetador {
     
     
-    private List<Persona> personas;
+    private List<Consola> personas;
     
     @XmlElement(name = "persona") //Opcional para el elemento especificado
-    public List<Persona> getPersonas(){
+    public List<Consola> getPersonas(){
         return personas;
     }
     
-    public void setPersonas(List<Persona> personas){
+    public void setPersonas(List<Consola> personas){
         this.personas = personas;
     }
     
