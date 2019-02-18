@@ -37,7 +37,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-public class LibretaDirecciones extends Application {
+public class Inventario extends Application {
 
     private ObservableList datosPersona = FXCollections.observableArrayList();
     private Stage escenarioPrincipal;
@@ -47,7 +47,7 @@ public class LibretaDirecciones extends Application {
     private ConexionSql conexionSql;
 
     //Datos de ejemplo
-    public LibretaDirecciones() {
+    public Inventario() {
         //datosPersona.add(new Persona("Guillermo", "Felipee", "Calle piruleta", "Madrid", 28400, LocalDate.of(1, 1, 1998)));
     }
 
@@ -91,12 +91,12 @@ public class LibretaDirecciones extends Application {
 
         //Cargo el layout principal a partir de la vista VistaPrincipal.fxml
         FXMLLoader loader = new FXMLLoader();
-        URL location = LibretaDirecciones.class.getResource("../view/VistaPrincipal.fxml");
+        URL location = Inventario.class.getResource("../view/VistaPrincipal.fxml");
         loader.setLocation(location);
         try {
             layoutPrincipal = loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(LibretaDirecciones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         //Cargo la escena que contiene ese layout principal
@@ -125,12 +125,12 @@ public class LibretaDirecciones extends Application {
 
         //Cargo la vista persona a partir de VistaPersona.fxml
         FXMLLoader loader = new FXMLLoader();
-        URL location = LibretaDirecciones.class.getResource("../view/VistaPersona.fxml");
+        URL location = Inventario.class.getResource("../view/VistaPersona.fxml");
         loader.setLocation(location);
         try {
             vistaPersona = loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(LibretaDirecciones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         //Añado la vista al centro del layoutPrincipal
@@ -148,16 +148,16 @@ public class LibretaDirecciones extends Application {
     }
 
     //Vista editarPersona
-    public boolean muestraEditarPersona(Consola persona) {
+    public boolean muestraEditarPersona(Consola consola) {
 
         //Cargo la vista persona a partir de VistaPersona.fxml
         FXMLLoader loader = new FXMLLoader();
-        URL location = LibretaDirecciones.class.getResource("../view/EditarPersona.fxml");
+        URL location = Inventario.class.getResource("../view/EditarPersona.fxml");
         loader.setLocation(location);
         try {
             editarPersona = loader.load();
         } catch (IOException ex) {
-            Logger.getLogger(LibretaDirecciones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -172,7 +172,7 @@ public class LibretaDirecciones extends Application {
         //Asigno el escenario de edición y la persona seleccionada al controlador
         EditarConsolaController controller = loader.getController();
         controller.setEscenarioEdicion(escenarioEdicion);
-        controller.setPersona(persona);
+        controller.setConsola(consola);
 
         //Muestro el diálogo ahjsta que el ussuario lo cierre
         escenarioEdicion.showAndWait();
@@ -190,7 +190,7 @@ public class LibretaDirecciones extends Application {
     //Obtengo la ruta del archivo de la preferencias de usuario en Java
     public File getRutaArchivoPersonas() {
 
-        Preferences prefs = Preferences.userNodeForPackage(LibretaDirecciones.class);
+        Preferences prefs = Preferences.userNodeForPackage(Inventario.class);
         String rutaArchivo = prefs.get("rutaArchivo", null);
         System.out.println(rutaArchivo);
         if (rutaArchivo != null) {
@@ -203,7 +203,7 @@ public class LibretaDirecciones extends Application {
     //Guardo la ruta del archivo en las preferencias de usuario en Java
     public void setRutaArchivoPersonas(File archivo) {
 
-        Preferences prefs = Preferences.userNodeForPackage(LibretaDirecciones.class);
+        Preferences prefs = Preferences.userNodeForPackage(Inventario.class);
         if (archivo != null) {
             //Añado la ruta a las preferencias
             prefs.put("rutaArchivo", archivo.getPath());

@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.LibretaDirecciones;
+import Controller.Inventario;
 import Model.Consola;
 import Util.UtilidadDeFechas;
 import javafx.fxml.FXML;
@@ -46,7 +46,7 @@ public class VistaConsolaController {
     private Label fechaUltimaAct;
     
     // Referencia a la clase principal
-    private LibretaDirecciones libretaDirecciones;
+    private Inventario libretaDirecciones;
     
     //El constructor es llamado ANTES del método initialize
     public VistaConsolaController() {
@@ -70,7 +70,7 @@ public class VistaConsolaController {
     }
 
     //Es llamado por la apliación principal para tener una referencia de vuelta de si mismo
-    public void setLibretaDirecciones(LibretaDirecciones libretaDirecciones) {
+    public void setLibretaDirecciones(Inventario libretaDirecciones) {
         
         this.libretaDirecciones = libretaDirecciones;
 

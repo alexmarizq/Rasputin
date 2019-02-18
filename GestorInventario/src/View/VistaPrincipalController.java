@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.LibretaDirecciones;
+import Controller.Inventario;
 import java.io.File;
 import java.sql.SQLException;
 import javafx.fxml.FXML;
@@ -18,10 +18,10 @@ import javafx.stage.FileChooser;
  */
 public class VistaPrincipalController {
     //Referencia a la clase principal
-    private LibretaDirecciones libretaDirecciones;
+    private Inventario libretaDirecciones;
 
     //Es llamada por la clase Principal para tener una referencia de vuelta de si misma
-    public void setLibretaDirecciones(LibretaDirecciones libretaDirecciones) {
+    public void setLibretaDirecciones(Inventario libretaDirecciones) {
         this.libretaDirecciones = libretaDirecciones;
     }
 
