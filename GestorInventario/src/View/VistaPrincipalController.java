@@ -18,18 +18,18 @@ import javafx.stage.FileChooser;
  */
 public class VistaPrincipalController {
     //Referencia a la clase principal
-    private Inventario libretaDirecciones;
+    private Inventario inventario;
 
     //Es llamada por la clase Principal para tener una referencia de vuelta de si misma
-    public void setLibretaDirecciones(Inventario libretaDirecciones) {
-        this.libretaDirecciones = libretaDirecciones;
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
     }
 
     //Creo una nueva libreta de direcciones en XML vacía
     @FXML
     private void nuevo() {
-        libretaDirecciones.getDatosPersona().clear();
-        libretaDirecciones.setRutaArchivoPersonas(null);
+        inventario.getDatosConsola().clear();
+        inventario.setRutaArchivoConsolas(null);
     }
 
     //Abro un File Chooser para que el usario seleccione una libreta
@@ -43,19 +43,19 @@ public class VistaPrincipalController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Muestro el diálogo de guardar
-        File archivo = fileChooser.showOpenDialog(libretaDirecciones.getPrimaryStage());
+        File archivo = fileChooser.showOpenDialog(inventario.getPrimaryStage());
 
         if (archivo != null) {
-            libretaDirecciones.cargaPersonas(archivo);
+            inventario.cargaConsolas(archivo);
         }
     }
 
     //Guardar
     @FXML
     private void guardar() throws SQLException {
-        File archivo = libretaDirecciones.getRutaArchivoPersonas();
+        File archivo = inventario.getRutaArchivoPersonas();
         if (archivo != null) {
-            libretaDirecciones.guardaPersonas(archivo);
+            inventario.guardaConsolas(archivo);
         } else {
             guardarComo();
         }
@@ -73,14 +73,14 @@ public class VistaPrincipalController {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Muestro el diálogo de guardar
-        File archivo = fileChooser.showSaveDialog(libretaDirecciones.getPrimaryStage());
+        File archivo = fileChooser.showSaveDialog(inventario.getPrimaryStage());
 
         if (archivo != null) {
             //Me aseguro de que tiene la extensión correcta
             if (!archivo.getPath().endsWith(".xml")) {
                 archivo = new File(archivo.getPath() + ".xml");
             }
-            libretaDirecciones.guardaPersonas(archivo);
+            inventario.guardaConsolas(archivo);
         }
     }
 
