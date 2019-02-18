@@ -13,8 +13,8 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextArea id="numeroCopias" fx:id="numeroCopias" layoutX="150.0" layoutY="66.0" prefHeight="37.0" prefWidth="85.0" />
-      <Button layoutX="77.0" layoutY="140.0" mnemonicParsing="false" onAction="#imprimir" text="Imprimir" />
-      <Button layoutX="167.0" layoutY="140.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <TextArea id="numeroCopias" layoutX="150.0" layoutY="66.0" prefHeight="37.0" prefWidth="85.0" />
+      <Button layoutX="77.0" layoutY="140.0" mnemonicParsing="false" text="Imprimir" />
+      <Button layoutX="167.0" layoutY="140.0" mnemonicParsing="false" text="Cancelar" />
    </children>
 </AnchorPane>

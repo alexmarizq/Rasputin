@@ -16,6 +16,4 @@ public class AdaptadorDeFechas extends XmlAdapter<String, LocalDate>{
         return v.toString();
     }
     
-    
-    
 }

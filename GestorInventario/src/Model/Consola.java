@@ -1,41 +1,36 @@
 package Model;
 
-import Util.FechaActual;
-import java.util.Calendar;
+import Util.AdaptadorDeFechas;
+import java.time.LocalDate;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.image.Image;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 public class Consola {
 
     private String nombre;
     private String marca;
     private String codigoBarras;
-    private double precio;
+    private Float precio;
     private String generacion;
-    private int stock;
-    private String fechaAlta; //fechaLanzamiento
-    private String fechaUltimaAct;
+    private Float stock;
+    private ObjectProperty fechaAlta; //fechaLanzamiento
+    private ObjectProperty fechaUltimaAct;
     private Image imagen;
 
-    public Consola() {
-        this.nombre = null;
-        this.marca = null;
-        this.codigoBarras = null;
-        this.precio = 0;
-        this.generacion = null;
-        this.stock = 0;
-        this.fechaAlta = FechaActual.getFecha();
-        this.fechaUltimaAct = FechaActual.getFecha();
+    public Consola(){
+        
     }
-
-    public Consola(String nombre, String marca, String codigoBarras, double precio, String generacion, int stock) {
+    public Consola(String nombre, String marca, String codigoBarras, Float precio, String generacion, Float stock, ObjectProperty fechaAlta, ObjectProperty fechaUltimaAct, Image imagen) {
         this.nombre = nombre;
         this.marca = marca;
         this.codigoBarras = codigoBarras;
         this.precio = precio;
         this.generacion = generacion;
         this.stock = stock;
-        this.fechaAlta = FechaActual.getFecha();
-        this.fechaUltimaAct = FechaActual.getFecha();
+        this.fechaAlta = fechaAlta;
+        this.fechaUltimaAct = fechaUltimaAct;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -50,7 +45,7 @@ public class Consola {
         return codigoBarras;
     }
 
-    public double getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
@@ -58,15 +53,33 @@ public class Consola {
         return generacion;
     }
 
-    public int getStock() {
+    public Float getStock() {
         return stock;
     }
 
-    public String getFechaAlta() {
-        return fechaAlta;
+    @XmlJavaTypeAdapter(AdaptadorDeFechas.class)
+    public LocalDate getFechaAlta() {
+        return (LocalDate) fechaAlta.get();
     }
 
-    public String getFechaUltimaActualizacion() {
+    public void setFechaAlta(LocalDate fechaDeNacimiento) {
+        this.fechaAlta.set(fechaDeNacimiento);
+    }
+
+    public ObjectProperty fechaDeAltaProperty() {
+        return fechaAlta;
+    }
+    
+     @XmlJavaTypeAdapter(AdaptadorDeFechas.class)
+    public LocalDate getFechaUltimaActualizacion() {
+        return (LocalDate) fechaUltimaAct.get();
+    }
+
+    public void setFechaUltimaActualizacion(LocalDate fechaDeNacimiento) {
+        this.fechaUltimaAct.set(fechaDeNacimiento);
+    }
+
+    public ObjectProperty fechaFechaUltimaActualizacion() {
         return fechaUltimaAct;
     }
 
@@ -86,7 +99,7 @@ public class Consola {
         this.codigoBarras = codigoBarras;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
 
@@ -94,19 +107,22 @@ public class Consola {
         this.generacion = generacion;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Float stock) {
         this.stock = stock;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(ObjectProperty fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    public void setFechaUltimaAct(String fechaUltimaAct) {
+    public void setFechaUltimaAct(ObjectProperty fechaUltimaAct) {
         this.fechaUltimaAct = fechaUltimaAct;
     }
 
     public void setImagen(Image imagen) {
         this.imagen = imagen;
     }
+    
+    
+   
 }

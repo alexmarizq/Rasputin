@@ -1,7 +1,6 @@
 package View;
 
 import Model.Consola;
-import Util.FechaActual;
 import Util.UtilidadDeFechas;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -37,6 +36,7 @@ public class EditarConsolaController {
     @FXML
     private void initialize() {
     }
+
     //Establece el escenario de edición
     public void setEscenarioEdicion(Stage escenarioEdicion) {
         this.escenarioEdicion = escenarioEdicion;
@@ -48,15 +48,16 @@ public class EditarConsolaController {
 
         nombre.setText(consola.getNombre());
         marca.setText(consola.getMarca());
-        codigoBarras.setText(consola.getCodigoBarras());
+        codigoBarras.setText(String.valueOf(consola.getCodigoBarras()));
         precio.setText(String.valueOf(consola.getPrecio()));
         generacion.setText(consola.getGeneracion());
-        stock.setText(String.valueOf(consola.getStock()));
-        fechaAlta.setText(consola.getFechaAlta());
-        fechaUltimaAct.setText(consola.getFechaUltimaActualizacion());
+        stock.setText(consola.getGeneracion());
+        fechaAlta.setText(UtilidadDeFechas.formato(consola.getFechaAlta()));
+        fechaUltimaAct.setText(UtilidadDeFechas.formato(consola.getFechaUltimaActualizacion()));
         //getImagen()??
-        //fechaAlta.setPromptText("dd/mm/yyyy");
-        //fechaUltimaAct.setPromptText("dd/mm/yyyy");
+        fechaAlta.setPromptText("dd/mm/yyyy");
+        fechaUltimaAct.setPromptText("dd/mm/yyyy");
+
     }
 
     //Devuelve true si se ha pulsado Guardar, si no devuelve false
@@ -73,11 +74,11 @@ public class EditarConsolaController {
             consola.setNombre(nombre.getText());
             consola.setMarca(marca.getText());
             consola.setCodigoBarras(codigoBarras.getText());
-            consola.setPrecio(Double.valueOf(precio.getText()));
+            consola.setPrecio(Float.valueOf(precio.getText()));
             consola.setGeneracion(generacion.getText());
-            consola.setStock(Integer.valueOf(stock.getText()));
-            consola.setFechaAlta(fechaAlta.getText());
-            consola.setFechaUltimaAct(FechaActual.getFecha());
+            consola.setStock(Float.valueOf(stock.getText()));
+            consola.setFechaAlta(UtilidadDeFechas.convertir(fechaAlta.getText()));
+            consola.setFechaUltimaActualizacion(UtilidadDeFechas.convertir(fechaUltimaAct.getText()));
 
             guardarClicked = true; //Cambio valor booleano
             escenarioEdicion.close(); //Cierro el escenario de edición

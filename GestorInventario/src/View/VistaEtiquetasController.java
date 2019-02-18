@@ -5,28 +5,25 @@
  */
 package View;
 
-import Model.Consola;
-import Util.CodigoDeBarras;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JButton;
 
 /**
  * FXML Controller class
  *
  * @author Rober
  */
-public class VistaEtiquetasController
-{
+public class VistaEtiquetasController{
 
     @FXML
-    private TextArea numeroCopias;
+    private TextField numeroCopias;
     
-    
-    private Stage vistaEtiquetas;
-    private Consola consola;
-    private boolean imprimirClicked = false;
+    private Stage escenarioEdicion;
     
     @FXML
     private void initialize() {
@@ -34,25 +31,11 @@ public class VistaEtiquetasController
 
     @FXML
     private void cancelar() {
-        vistaEtiquetas.close();
-    }
-    
-    public void setEscenarioEdicion(Stage vistaEtiquetas) {
-        this.vistaEtiquetas = vistaEtiquetas;
-    }
-    
-    public void setConsola(Consola consola){
-        this.consola = consola;
-    }
-    
-    public boolean isImprimirClicked() {
-        return imprimirClicked;
+        escenarioEdicion.close();
     }
     
     @FXML
     private void imprimir(){
-        CodigoDeBarras.getCode(consola.getCodigoBarras(), Integer.valueOf(numeroCopias.getText()));
-        imprimirClicked = true;
-        vistaEtiquetas.close();
+        System.out.println(numeroCopias.getText());
     }
 }

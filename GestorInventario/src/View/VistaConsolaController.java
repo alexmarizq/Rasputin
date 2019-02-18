@@ -13,12 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
+
 /**
  *
  * @author Rober
  */
 public class VistaConsolaController {
-
+    
     @FXML
     private TableView tablaConsolas;
     @FXML
@@ -42,10 +44,10 @@ public class VistaConsolaController {
     private Label fechaAlta;
     @FXML
     private Label fechaUltimaAct;
-
+    
     // Referencia a la clase principal
-    private Inventario inventario;
-
+    private Inventario libretaDirecciones;
+    
     //El constructor es llamado ANTES del método initialize
     public VistaConsolaController() {
     }
@@ -53,32 +55,32 @@ public class VistaConsolaController {
     //Inicializa la clase controller y es llamado justo después de cargar el archivo FXML
     @FXML
     private void initialize() {
-
+        
         //Inicializo la tabla con las dos primera columnas
         String nombre = "Consola";
         String id = "ID";
         consolaColumn.setCellValueFactory(new PropertyValueFactory<>(nombre));
         idColumn.setCellValueFactory(new PropertyValueFactory<>(id));
-
+        
         //Borro los detalles de la persona
         mostrarDetallesConsola(null);
-
+        
         //Escucho cambios en la selección de la tabla y muestro los detalles en caso de cambio
         tablaConsolas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> mostrarDetallesConsola((Consola) newValue));
     }
 
     //Es llamado por la apliación principal para tener una referencia de vuelta de si mismo
-    public void setLibretaDirecciones(Inventario inventario) {
-
-        this.inventario = inventario;
+    public void setLibretaDirecciones(Inventario libretaDirecciones) {
+        
+        this.libretaDirecciones = libretaDirecciones;
 
         //Añado la lista obervable a la tabla
-        tablaConsolas.setItems(inventario.getDatosConsola());
+        tablaConsolas.setItems(libretaDirecciones.getDatosPersona());
     }
-
+    
     //Muestra los detalles de la persona seleccionada
     private void mostrarDetallesConsola(Consola consola) {
-
+        
         if (consola != null) {
             //Relleno los labels desde el objeto persona
             nombre.setText(consola.getNombre());
@@ -87,8 +89,8 @@ public class VistaConsolaController {
             precio.setText(String.valueOf(consola.getPrecio()));
             generacion.setText(consola.getGeneracion());
             stock.setText(String.valueOf(consola.getStock()));
-            fechaAlta.setText(consola.getFechaAlta());
-            fechaUltimaAct.setText(consola.getFechaUltimaActualizacion());
+            fechaAlta.setText(UtilidadDeFechas.formato(consola.getFechaAlta()));
+            fechaUltimaAct.setText(UtilidadDeFechas.formato(consola.getFechaUltimaActualizacion()));
         } else {
             //Persona es null, vacío todos los labels.
             nombre.setText("");
@@ -101,15 +103,16 @@ public class VistaConsolaController {
             fechaUltimaAct.setText("");
         }
     }
-
+    
     //Borro la persona seleccionada cuando el usuario hace clic en el botón de Borrar
     @FXML
     private void borrarPersona() {
         //Capturo el indice seleccionado y borro su item asociado de la tabla
         int indiceSeleccionado = tablaConsolas.getSelectionModel().getSelectedIndex();
-        if (indiceSeleccionado >= 0) {
+        if (indiceSeleccionado >= 0){
             //Borro item
             tablaConsolas.getItems().remove(indiceSeleccionado);
+            
         } else {
             //Muestro alerta
             Alert alerta = new Alert(AlertType.WARNING);
@@ -117,27 +120,26 @@ public class VistaConsolaController {
             alerta.setHeaderText("Persona no seleccionada");
             alerta.setContentText("Por favor, selecciona una persona de la tabla");
             alerta.showAndWait();
-        }
+                        
+        }    
     }
-
+    
     //Muestro el diálogo editar persona cuando el usuario hace clic en el botón de Crear
     @FXML
     private void crearConsola() {
         Consola temporal = new Consola();
-        System.out.println("Temporal " + temporal);
-        System.out.println("Inventario " + inventario);
-        boolean guardarClicked = inventario.muestraEditarConsola(temporal);
+        boolean guardarClicked = libretaDirecciones.muestraEditarPersona(temporal);
         if (guardarClicked) {
-            inventario.getDatosConsola().add(temporal);
+            libretaDirecciones.getDatosPersona().add(temporal);
         }
     }
-
+    
     //Muestro el diálogo editar consola cuando el usuario hace clic en el botón de Editar
     @FXML
     private void editarConsola() {
         Consola seleccionada = (Consola) tablaConsolas.getSelectionModel().getSelectedItem();
         if (seleccionada != null) {
-            boolean guardarClicked = inventario.muestraEditarConsola(seleccionada);
+            boolean guardarClicked = libretaDirecciones.muestraEditarPersona(seleccionada);
             if (guardarClicked) {
                 mostrarDetallesConsola(seleccionada);
             }
@@ -151,22 +153,8 @@ public class VistaConsolaController {
             alerta.showAndWait();
         }
     }
-
-    public void generarEtiqueta() {
-        Consola seleccionada = (Consola) tablaConsolas.getSelectionModel().getSelectedItem();
-        if (seleccionada != null) {
-            boolean guardarClicked = inventario.muestraImprimirEtiqueta(seleccionada);
-            if (guardarClicked) {
-                mostrarDetallesConsola(seleccionada);
-            }
-
-        } else {
-            //Muestro alerta
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("Alerta");
-            alerta.setHeaderText("Consola no seleccionada");
-            alerta.setContentText("Por favor, selecciona una consola");
-            alerta.showAndWait();
-        }
+    
+     public void generarEtiqueta(){
+        
     }
 }
