@@ -36,6 +36,9 @@
 .table-view .column-header-background {
     -fx-background-color: transparent;
 }
+.table-cell{
+    -fx-text-fill: #e2e0e0;
+}
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Util;
 
 import com.jcraft.jsch.JSch;
@@ -24,9 +19,9 @@ public class ConexionSsh {
     private static Connection conexion = null;
     String hostSsh = "104.248.240.20";
     String usuarioSsh = "root";
-    int puertoSsh = 990;
+    int puertoSsh = 22;
     /* en el caso de CEU, usa el 990 */
-    String keySsh = "id_rsa.pem";
+    String keySsh = "src\\util\\id_rsa.pem";
     String hostRemoto = "127.0.0.1";
     int puertoLocal = 8740; // cualquier puerto vacío para redireccionar
     int puertoRemoto = 3306;
@@ -50,6 +45,7 @@ public class ConexionSsh {
             puertoAsignado = sesion.setPortForwardingL(puertoLocal, hostRemoto, puertoRemoto);   
             System.out.println("Puerto asignado: "+ puertoAsignado);
         } catch (JSchException ex) {
+            System.out.println(ex);
             System.out.println("Error conectando con KRAA");
         }
 

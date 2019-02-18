@@ -14,16 +14,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VistaPersonaController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="850.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VistaConsolaController">
    <children>
       <SplitPane dividerPositions="0.2259970457902511" layoutX="200.0" layoutY="102.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="tablaPersonas" layoutX="-12.0" layoutY="69.0" prefHeight="462.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tablaConsolas" prefHeight="462.0" prefWidth="259.0" stylesheets="@../CSS/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="nombreColumn" editable="false" prefWidth="131.0" text="Producto" />
-                      <TableColumn fx:id="apellidosColumn" minWidth="0.0" prefWidth="118.0" text="ID" />
+                      <TableColumn fx:id="consolaColumn" editable="false" prefWidth="131.0" text="Producto" />
+                      <TableColumn fx:id="idColumn" minWidth="0.0" prefWidth="118.0" text="ID" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -79,32 +79,32 @@
                               <Font name="Calibri" size="10.0" />
                            </font>
                         </Label>
-                        <Label fx:id="nombreLabel" prefHeight="82.0" prefWidth="240.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1">
+                        <Label fx:id="nombre" prefHeight="82.0" prefWidth="240.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="apellidosLabel" prefHeight="60.0" prefWidth="250.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="marca" prefHeight="60.0" prefWidth="250.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="direccionLabel" prefHeight="65.0" prefWidth="256.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="codigoBarras" prefHeight="65.0" prefWidth="256.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="ciudadLabel" prefHeight="93.0" prefWidth="281.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="precio" prefHeight="93.0" prefWidth="281.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="codigoPostalLabel" prefHeight="81.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="generacion" prefHeight="81.0" prefWidth="266.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="fechaDeNacimientoLabel" prefHeight="49.0" prefWidth="274.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="stock" prefHeight="49.0" prefWidth="274.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
@@ -114,7 +114,7 @@
                               <Font name="Calibri" size="10.0" />
                            </font>
                         </Label>
-                        <Label fx:id="fechaDeNacimientoLabel1" prefHeight="49.0" prefWidth="276.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <Label fx:id="fechaAlta" prefHeight="49.0" prefWidth="276.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
@@ -124,7 +124,7 @@
                               <Font name="Calibri" size="9.0" />
                            </font>
                         </Label>
-                        <Label fx:id="fechaDeNacimientoLabel11" prefHeight="49.0" prefWidth="276.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Label fx:id="fechaUltimaAct" prefHeight="49.0" prefWidth="276.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
@@ -143,8 +143,8 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <Button layoutX="10.0" layoutY="558.0" mnemonicParsing="false" onAction="#crearPersona" text="Nuevo" />
-                  <Button layoutX="124.0" layoutY="558.0" mnemonicParsing="false" onAction="#editarPersona" text="Editar" />
+                  <Button layoutX="10.0" layoutY="558.0" mnemonicParsing="false" onAction="#crearConsola" text="Nuevo" />
+                  <Button layoutX="124.0" layoutY="558.0" mnemonicParsing="false" onAction="#editarConsola" text="Editar" />
                   <Button layoutX="236.0" layoutY="558.0" mnemonicParsing="false" onAction="#borrarPersona" text="Borrar" />
                   <Button layoutX="347.0" layoutY="558.0" mnemonicParsing="false" onAction="#generarEtiqueta" text="Etiqueta" />
                </children>
