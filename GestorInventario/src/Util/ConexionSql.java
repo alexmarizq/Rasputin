@@ -72,9 +72,9 @@ public class ConexionSql {
     public void putConsola(List<Consola> consolas) throws SQLException, Exception{
         
         //Borro todas
-        /*Statement stmnt = conexion.createStatement();
+        Statement stmnt = conexion.createStatement();
         stmnt.executeUpdate("DELETE FROM consolas");
-        stmnt.close();*/
+        stmnt.close();
         //Preparo el statement
         String query = "INSERT INTO consolas (id,nombre,marca,descripcion,precio,stock,fecha_alta,fecha_mod,barcode,slug,activo,imagen,home,generacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conexion.prepareStatement(query);
