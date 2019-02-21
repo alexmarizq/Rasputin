@@ -74,7 +74,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="fechaUltimaAct" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="fechaUltimaAct" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Button cancelButton="true" layoutX="468.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="38.0" prefWidth="118.0" text="Cancelar" />

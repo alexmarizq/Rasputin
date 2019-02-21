@@ -11,6 +11,7 @@ import Util.ConexionSql;
 import Util.ConexionSsh;
 import View.EditarConsolaController;
 import View.VistaConsolaController;
+import View.VistaEstadisticasController;
 import View.VistaEtiquetasController;
 import View.VistaPrincipalController;
 import com.jcraft.jsch.JSchException;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -45,13 +47,13 @@ public class Inventario extends Application {
     private ObservableList datosConsola = FXCollections.observableArrayList();
     private Stage escenarioPrincipal;
     private BorderPane layoutPrincipal;
-    private AnchorPane vistaConsola, vistaEtiquetas;
+    private AnchorPane vistaConsola, vistaEtiquetas, vistaEstadisticas;
     private Parent editarConsola;
-    private ConexionSql conexionSql;
+    public static ConexionSql conexionSql;
 
     //Datos de ejemplo
     public Inventario() {
-        datosConsola.add(new Consola("PS4", "Sony", "123456789", 299.99, "Primera", 10));
+        datosConsola.add(new Consola(1, "PS4", "Sony", "123456789", 29, "Primera", 10));
     }
 
     //Método para devolver los datos como lista observable de personas
@@ -75,13 +77,10 @@ public class Inventario extends Application {
         //conexionSql = new ConexionSql("jdbc:mysql://104.248.240.20:3306/kraa?useSSL=false", "root", "Root1234#");
 
         //Establezco la conexión SSH
-        //ConexionSsh conexionSsh = new ConexionSsh();
+        ConexionSsh conexionSsh = new ConexionSsh();
         
-
-        //Establezco conexión con la base de datos local
-        //conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:3306/dam?useSSL=false", "dam", "dam");
         //Establezco conexión con la base de datos remota
-        //conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:" + conexionSsh.puertoAsignado + "/dam?useSSL=false", "root", "Root1234#");
+        conexionSql = new ConexionSql("jdbc:mysql://127.0.0.1:" + conexionSsh.puertoAsignado + "/kraa", "root", "Root1234#");
         
         //Inicializo el layout principal
         initLayoutPrincipal();
@@ -121,8 +120,12 @@ public class Inventario extends Application {
         }
 
         //Cargo personas de la base de datos (borrando las anteriores)
-        //datosConsola.clear();
-        //datosConsola.addAll(conexionSql.getPersonas());
+        datosConsola.clear();
+        List listaConsolas = conexionSql.getConsolas();
+        System.out.println(listaConsolas.size());
+        for (int i = 0; i < listaConsolas.size(); i++) {
+            datosConsola.add(listaConsolas.get(i));
+        }
     }
 
     public void muestraVistaPersona() {
@@ -142,7 +145,7 @@ public class Inventario extends Application {
 
         //Doy acceso al controlador VistaPersonaCOntroller a LibretaDirecciones
         VistaConsolaController controller = loader.getController();
-        controller.setLibretaDirecciones(this);
+        controller.setLibretaConsolas(this);
 
     }
 
@@ -290,32 +293,67 @@ public class Inventario extends Application {
     public void guardaConsolas(File archivo) throws SQLException {
 
         try {
-            //Contexto
-            JAXBContext context = JAXBContext.newInstance(Empaquetador.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            //Empaqueto los datos de las personas
-            Empaquetador empaquetador = new Empaquetador();
-            empaquetador.setConsolas(datosConsola);
-
-            //Marshall y guardo XML a archivo
-            m.marshal(empaquetador, archivo);
-
-            //Guardo la ruta delk archivo en el registro
-            setRutaArchivoConsolas(archivo);
-
-        } catch (Exception e) { // catches ANY exception
-            //Muestro alerta
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("No se puede guardar en el archivo " + archivo.getPath());
-            alerta.setContentText(e.toString());
-            alerta.showAndWait();
+            
+            try {
+                //Contexto
+                JAXBContext context = JAXBContext.newInstance(Empaquetador.class);
+                Marshaller m = context.createMarshaller();
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                
+                //Empaqueto los datos de las personas
+                Empaquetador empaquetador = new Empaquetador();
+                empaquetador.setConsolas(datosConsola);
+                
+                //Marshall y guardo XML a archivo
+                m.marshal(empaquetador, archivo);
+                
+                //Guardo la ruta delk archivo en el registro
+                setRutaArchivoConsolas(archivo);
+                
+            } catch (Exception e) { // catches ANY exception
+                //Muestro alerta
+                Alert alerta = new Alert(Alert.AlertType.ERROR);
+                alerta.setTitle("Error");
+                alerta.setHeaderText("No se puede guardar en el archivo " + archivo.getPath());
+                alerta.setContentText(e.toString());
+                alerta.showAndWait();
+            }
+            
+            //Guardar en la base de datos
+            conexionSql.putConsola(datosConsola);
+        } catch (Exception ex) {             Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void crearGrafico() {
+        
+        //Cargo la vista estadísticas
+        FXMLLoader loader = new FXMLLoader();
+        URL location = Inventario.class.getResource("/view/VistaEstadisticas.fxml");
+        loader.setLocation(location);
+        try {
+            vistaEstadisticas = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Inicializo un nuevo escenario y asigno el principal
+        Stage escenarioEstadisticas = new Stage();        
+        escenarioEstadisticas.setTitle("Estadísticas");
+        escenarioEstadisticas.initModality(Modality.WINDOW_MODAL);
+        escenarioEstadisticas.initOwner(escenarioPrincipal);
+        
+        //Cargo la escena que contiene ese layout de estadisticas
+        Scene escena = new Scene(vistaEstadisticas);
+        escenarioEstadisticas.setScene(escena);
+                    
+        //Asigno el controlador
+        VistaEstadisticasController controller = loader.getController();
+        controller.setDatosConsola(datosConsola);
 
-        //Guardar en la base de datos
-        conexionSql.putConsola(datosConsola);
+        //Muestro el escenario
+        escenarioEstadisticas.show();
+        
     }
 
 }

@@ -1,8 +1,12 @@
 package View;
 
+import Controller.Inventario;
 import Model.Consola;
 import Util.FechaActual;
 import Util.UtilidadDeFechas;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -52,11 +56,9 @@ public class EditarConsolaController {
         precio.setText(String.valueOf(consola.getPrecio()));
         generacion.setText(consola.getGeneracion());
         stock.setText(String.valueOf(consola.getStock()));
-        fechaAlta.setText(consola.getFechaAlta());
-        fechaUltimaAct.setText(consola.getFechaUltimaActualizacion());
+        fechaAlta.setText(String.valueOf(consola.getFechaAlta()));
+        fechaUltimaAct.setText(FechaActual.getFechaKikote());
         //getImagen()??
-        //fechaAlta.setPromptText("dd/mm/yyyy");
-        //fechaUltimaAct.setPromptText("dd/mm/yyyy");
     }
 
     //Devuelve true si se ha pulsado Guardar, si no devuelve false
@@ -76,12 +78,13 @@ public class EditarConsolaController {
             consola.setPrecio(Double.valueOf(precio.getText()));
             consola.setGeneracion(generacion.getText());
             consola.setStock(Integer.valueOf(stock.getText()));
-            consola.setFechaAlta(fechaAlta.getText());
-            consola.setFechaUltimaAct(FechaActual.getFecha());
+            consola.setFechaAlta(FechaActual.getFechaKikote());
+            consola.setFechaUltimaAct(FechaActual.getFechaKikote());
+            System.out.println(consola.getFechaUltimaActualizacion());
 
             guardarClicked = true; //Cambio valor booleano
             escenarioEdicion.close(); //Cierro el escenario de edición
-
+            Inventario.conexionSql.modificar(consola);
         }
     }
 
@@ -100,12 +103,15 @@ public class EditarConsolaController {
         //Compruebo los campos
         if (nombre.getText() == null || nombre.getText().length() == 0) {
             mensajeError += "Nombre no válido.\n";
+            System.out.println("error en nombre");
         }
         if (marca.getText() == null || marca.getText().length() == 0) {
             mensajeError += "Marca no válida.\n";
+            System.out.println("error en marca");
         }
         if (codigoBarras.getText() == null || codigoBarras.getText().length() != 9) {
             mensajeError += "Código de Barras no válido.\n";
+            System.out.println("error en codigo de barras");
         }
 
         if (precio.getText() == null || precio.getText().length() == 0) {
@@ -116,38 +122,46 @@ public class EditarConsolaController {
                 Float.valueOf(precio.getText());
             } catch (NumberFormatException e) {
                 mensajeError += "Precio no válido (debe ser un float).\n";
+                System.out.println("error en precio");
             }
         }
 
         if (generacion.getText() == null || generacion.getText().length() == 0) {
             mensajeError += "Generación no válida.\n";
+            System.out.println("error en generacion");
         }
 
         if (stock.getText() == null || stock.getText().length() == 0) {
             mensajeError += "Stock no válido.\n";
+            System.out.println("stock no valido");
         } else {
             //Convierto el código postal a float
             try {
                 Float.valueOf(stock.getText());
             } catch (NumberFormatException e) {
+                System.out.println("error en stock");
                 mensajeError += "Stock no válido (debe ser un float).\n";
             }
         }
 
         if (fechaAlta.getText() == null || fechaAlta.getText().length() == 0) {
-            mensajeError += "Fecha de nacimiento no válida.\n";
+            mensajeError += "Fecha de alta no válida.\n";
+            System.out.println("error en fecha de alta");
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaAlta.getText())) {
-                mensajeError += "Fecha de alta no válida (debe tener formato dd/mm/yyyy).\n";
+                mensajeError += "Fecha de alta no válida (debe tener formato yyyy-MM-dd hh-mm-ss).\n";
+                System.out.println("error en fecha alta");
             }
         }
 
         //intentar que se actualice automaticamente
         if (fechaUltimaAct.getText() == null || fechaUltimaAct.getText().length() == 0) {
             mensajeError += "Fecha de nacimiento no válida.\n";
+            System.out.println("error en fecha act");
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaUltimaAct.getText())) {
                 mensajeError += "Fecha de alta no válida (debe tener formato dd/mm/yyyy).\n";
+                System.out.println("error en fecha act");
             }
         }
         

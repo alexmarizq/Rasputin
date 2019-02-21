@@ -7,7 +7,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="850.0" stylesheets="@../CSS/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VistaPrincipalController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
@@ -23,6 +23,11 @@
               <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Mostrar" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Gráfico">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#grafico" text="Generar Gráfico" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

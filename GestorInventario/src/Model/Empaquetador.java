@@ -10,7 +10,7 @@ public class Empaquetador {
     
     private List<Consola> consolas;
     
-    @XmlElement(name = "persona") //Opcional para el elemento especificado
+    @XmlElement(name = "consola") //Opcional para el elemento especificado
     public List<Consola> getConsolas(){
         return consolas;
     }

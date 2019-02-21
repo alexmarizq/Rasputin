@@ -99,4 +99,10 @@ public class VistaPrincipalController {
     private void salir() {
         System.exit(0);
     }
+    
+    //Gráfico
+    @FXML
+    private void grafico() {
+      inventario.crearGrafico();
+    }
 }

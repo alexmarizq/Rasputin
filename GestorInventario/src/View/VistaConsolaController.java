@@ -7,7 +7,9 @@ package View;
 
 import Controller.Inventario;
 import Model.Consola;
-import Util.UtilidadDeFechas;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -55,9 +57,10 @@ public class VistaConsolaController {
     private void initialize() {
 
         //Inicializo la tabla con las dos primera columnas
-        String nombre = "Consola";
-        String id = "ID";
-        consolaColumn.setCellValueFactory(new PropertyValueFactory<>(nombre));
+        String nombre = "nombre";
+        String id = "id";
+        consolaColumn.setCellValueFactory(new PropertyValueFactory(nombre));
+        //consolaColumn.setCellValueFactory(new PropertyValueFactory<>(nombre));
         idColumn.setCellValueFactory(new PropertyValueFactory<>(id));
 
         //Borro los detalles de la persona
@@ -68,7 +71,7 @@ public class VistaConsolaController {
     }
 
     //Es llamado por la apliación principal para tener una referencia de vuelta de si mismo
-    public void setLibretaDirecciones(Inventario inventario) {
+    public void setLibretaConsolas(Inventario inventario) {
 
         this.inventario = inventario;
 
@@ -104,18 +107,22 @@ public class VistaConsolaController {
 
     //Borro la persona seleccionada cuando el usuario hace clic en el botón de Borrar
     @FXML
-    private void borrarPersona() {
+    private void borrarConsola() throws SQLException {
         //Capturo el indice seleccionado y borro su item asociado de la tabla
         int indiceSeleccionado = tablaConsolas.getSelectionModel().getSelectedIndex();
         if (indiceSeleccionado >= 0) {
             //Borro item
+            Consola aux = new Consola();
+            aux = (Consola) tablaConsolas.getSelectionModel().getSelectedItem();
+            System.out.println("Nombre borrada = " + aux.getNombre());
             tablaConsolas.getItems().remove(indiceSeleccionado);
+            Inventario.conexionSql.borrar(aux.getNombre());
         } else {
             //Muestro alerta
             Alert alerta = new Alert(AlertType.WARNING);
             alerta.setTitle("Atención");
-            alerta.setHeaderText("Persona no seleccionada");
-            alerta.setContentText("Por favor, selecciona una persona de la tabla");
+            alerta.setHeaderText("Consola no seleccionada");
+            alerta.setContentText("Por favor, selecciona una consola de la tabla");
             alerta.showAndWait();
         }
     }
@@ -124,11 +131,16 @@ public class VistaConsolaController {
     @FXML
     private void crearConsola() {
         Consola temporal = new Consola();
-        System.out.println("Temporal " + temporal);
-        System.out.println("Inventario " + inventario);
         boolean guardarClicked = inventario.muestraEditarConsola(temporal);
         if (guardarClicked) {
-            inventario.getDatosConsola().add(temporal);
+            try {
+                inventario.getDatosConsola().add(temporal);
+                Inventario.conexionSql.putConsola(inventario.getDatosConsola());
+            } catch (SQLException ex) {
+                Logger.getLogger(VistaConsolaController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(VistaConsolaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

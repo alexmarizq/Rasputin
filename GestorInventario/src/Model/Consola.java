@@ -7,39 +7,63 @@ import javafx.scene.image.Image;
 public class Consola {
 
     private String nombre;
+    private int id;
     private String marca;
     private String codigoBarras;
     private double precio;
     private String generacion;
+    private String descripcion;
     private int stock;
     private String fechaAlta; //fechaLanzamiento
     private String fechaUltimaAct;
     private Image imagen;
+    int cont = 30;
 
     public Consola() {
+        this.id = cont;
         this.nombre = null;
         this.marca = null;
         this.codigoBarras = null;
         this.precio = 0;
         this.generacion = null;
         this.stock = 0;
-        this.fechaAlta = FechaActual.getFecha();
-        this.fechaUltimaAct = FechaActual.getFecha();
+        this.fechaAlta = FechaActual.getFechaKikote();
+        this.fechaUltimaAct = FechaActual.getFechaKikote();
+        cont++;
     }
 
-    public Consola(String nombre, String marca, String codigoBarras, double precio, String generacion, int stock) {
+    public Consola(int id, String nombre, String marca, String codigoBarras, double precio, String generacion, int stock) {
+        this.id = id;
         this.nombre = nombre;
         this.marca = marca;
         this.codigoBarras = codigoBarras;
         this.precio = precio;
         this.generacion = generacion;
         this.stock = stock;
-        this.fechaAlta = FechaActual.getFecha();
-        this.fechaUltimaAct = FechaActual.getFecha();
+        this.fechaAlta = FechaActual.getFechaKikote();
+        this.fechaUltimaAct = FechaActual.getFechaKikote();
+        this.descripcion = "Caca";
+    }
+    
+    public Consola(int id, String nombre, String marca, String codigoBarras, double precio, String generacion, int stock, String fechaAlta, String fechaUltimaAct) {
+        this.id = id;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.codigoBarras = codigoBarras;
+        this.precio = precio;
+        this.generacion = generacion;
+        this.stock = stock;
+        this.fechaAlta = fechaAlta;
+        this.fechaUltimaAct = fechaUltimaAct;
+        this.descripcion = "Caca";
     }
 
     public String getNombre() {
         return nombre;
+    }
+    
+    public int getId(){
+        return id;
     }
 
     public String getMarca() {
@@ -73,9 +97,21 @@ public class Consola {
     public Image getImagen() {
         return imagen;
     }
+    
+    public String getAnoSalida(){
+        return fechaAlta.substring(fechaAlta.length()-4);
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public void setMarca(String marca) {
@@ -108,5 +144,9 @@ public class Consola {
 
     public void setImagen(Image imagen) {
         this.imagen = imagen;
+    }
+    
+    public void setDescripcion (String desc){
+        this.descripcion = desc;
     }
 }

@@ -5,8 +5,10 @@
  */
 package Util;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -14,9 +16,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class FechaActual {
 
-    public static String getFecha() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static String getFechaKikote() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
+
 }
