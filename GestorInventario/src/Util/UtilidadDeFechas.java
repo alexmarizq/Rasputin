@@ -25,6 +25,7 @@ public class UtilidadDeFechas {
     //Convierte un string en un objeto de tipo LocalDate (o null si no puede convertirlo)
     public static LocalDate convertir(String fecha) {
         try {
+            System.out.println(FECHA_FORMATTER.parse(fecha, LocalDate::from) + " en convertir");
             return FECHA_FORMATTER.parse(fecha, LocalDate::from);
         } catch (DateTimeParseException e) {
             return null;
@@ -34,7 +35,7 @@ public class UtilidadDeFechas {
     //Comprueba si un string de fecha es una fecha válida y devuelve 1 o 0
     //Usamos el método anterior para la comprobación
     public static boolean fechaValida(String fecha) {
-        
+        System.out.println(UtilidadDeFechas.convertir(fecha) + " en fechavalida");
         return UtilidadDeFechas.convertir(fecha) != null;
         
     }

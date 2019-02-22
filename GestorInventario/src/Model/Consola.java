@@ -42,7 +42,6 @@ public class Consola {
         this.stock = stock;
         this.fechaAlta = FechaActual.getFechaKikote();
         this.fechaUltimaAct = FechaActual.getFechaKikote();
-        this.descripcion = "Caca";
     }
     
     public Consola(int id, String nombre, String marca, String codigoBarras, double precio, String generacion, int stock, String fechaAlta, String fechaUltimaAct) {
@@ -55,7 +54,6 @@ public class Consola {
         this.stock = stock;
         this.fechaAlta = fechaAlta;
         this.fechaUltimaAct = fechaUltimaAct;
-        this.descripcion = "Caca";
     }
 
     public String getNombre() {

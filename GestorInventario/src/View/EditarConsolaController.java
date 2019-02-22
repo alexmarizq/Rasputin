@@ -159,11 +159,11 @@ public class EditarConsolaController {
         //intentar que se actualice automaticamente
         if (fechaUltimaAct.getText() == null || fechaUltimaAct.getText().length() == 0) {
             mensajeError += "Fecha de nacimiento no válida.\n";
-            System.out.println("error en fecha act");
+            System.out.println("error en fecha");
             System.out.println(fechaUltimaAct.getText());
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaUltimaAct.getText())) {
-                mensajeError += "Fecha de alta no válida (debe tener formato dd/mm/yyyy).\n";
+                mensajeError += "Fecha de alta no válida (debe tener formato yyyy-MM-dd hh-mm-ss-ms).\n";
                 System.out.println("error en fecha act");
             System.out.println(fechaUltimaAct.getText());
             }
