@@ -46,7 +46,7 @@ public class ConexionSql {
     public List getConsolas() throws SQLException{
         
         Statement stmnt = conexion.createStatement();
-        ResultSet rs = stmnt.executeQuery("SELECT * FROM consolas");
+        ResultSet rs = stmnt.executeQuery("SELECT * FROM consolaskike");
 
         List<Consola> consolas = new ArrayList<>();
         while (rs.next()) {
@@ -73,10 +73,11 @@ public class ConexionSql {
         
         //Borro todas
         Statement stmnt = conexion.createStatement();
-        stmnt.executeUpdate("DELETE FROM consolas");
+        stmnt.executeUpdate("DELETE FROM consolaskike");
         stmnt.close();
         //Preparo el statement
-        String query = "INSERT INTO consolas (id,nombre,marca,descripcion,precio,stock,fecha_alta,fecha_mod,barcode,slug,activo,imagen,home,generacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO consolaskike (id,nombre,marca,descripcion,precio,stock,"
+                + "fecha_alta,fecha_mod,barcode,slug,activo,imagen,home,generacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps = conexion.prepareStatement(query);
         //Añado cada persona
         for (Consola consola : consolas){
@@ -108,13 +109,13 @@ public class ConexionSql {
     
     public void borrar(String nombre) throws SQLException{
         Statement stmnt = conexion.createStatement();
-        stmnt.executeUpdate("DELETE FROM consolas WHERE nombre = '" + nombre + "'");
+        stmnt.executeUpdate("DELETE FROM consolaskike WHERE nombre = '" + nombre + "'");
         stmnt.close(); 
     }
     
     public void modificar(Consola consola){
         try {
-            String query = "UPDATE consolas SET nombre = '" + consola.getNombre() + "',"
+            String query = "UPDATE consolaskike SET nombre = '" + consola.getNombre() + "',"
                     + " marca = '" + consola.getMarca() + "', descripcion = '" + consola.getDescripcion() + "',"
                     + " precio = " + consola.getPrecio() +", stock = " + consola.getStock() + ""
                     + ", fecha_alta = '" + consola.getFechaAlta() + "', fecha_mod = '" + consola.getFechaUltimaActualizacion() +"'"

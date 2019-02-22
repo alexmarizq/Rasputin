@@ -56,7 +56,7 @@ public class EditarConsolaController {
         precio.setText(String.valueOf(consola.getPrecio()));
         generacion.setText(consola.getGeneracion());
         stock.setText(String.valueOf(consola.getStock()));
-        fechaAlta.setText(String.valueOf(consola.getFechaAlta()));
+        fechaAlta.setText(consola.getFechaAlta().substring(0, 16));
         fechaUltimaAct.setText(FechaActual.getFechaKikote());
         //getImagen()??
     }
@@ -149,7 +149,7 @@ public class EditarConsolaController {
             System.out.println("error en fecha de alta");
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaAlta.getText())) {
-                mensajeError += "Fecha de alta no válida (debe tener formato yyyy-MM-dd hh-mm-ss).\n";
+                mensajeError += "Fecha de alta no válida (debe tener formato yyyy-MM-dd hh-mm-ss-ms).\n";
                 System.out.println("error en fecha alta");
             }
         }

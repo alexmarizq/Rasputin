@@ -53,7 +53,7 @@ public class Inventario extends Application {
 
     //Datos de ejemplo
     public Inventario() {
-        datosConsola.add(new Consola(1, "PS4", "Sony", "123456789", 29, "Primera", 10));
+//        datosConsola.add(new Consola(1, "PS4", "Sony", "123456789", 29, "Primera", 10));
     }
 
     //Método para devolver los datos como lista observable de personas
@@ -290,7 +290,7 @@ public class Inventario extends Application {
     }
 
     //Guardo personas en un fichero
-    public void guardaConsolas(File archivo) throws SQLException {
+        public void guardaConsolas(File archivo) throws SQLException {
 
         try {
             

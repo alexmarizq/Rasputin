@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class UtilidadDeFechas {
     //El patrón utilizado para la conversión
-    private static final String FECHA_PATTERN = "yyyy-MM-dd hh:mm";
+    private static final String FECHA_PATTERN = "yyyy-MM-dd hh:mm:SS.SSS";
     
     //El formateador de fecha
     private static final DateTimeFormatter FECHA_FORMATTER = DateTimeFormatter.ofPattern(FECHA_PATTERN);

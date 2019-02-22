@@ -20,12 +20,11 @@ public class ConexionSsh {
     String hostSsh = "104.248.240.20";
     String usuarioSsh = "root";
     int puertoSsh = 22;
-    /* en el caso de CEU, usa el 990 */
     String keySsh = "src\\util\\id_rsa.pem";
     String hostRemoto = "127.0.0.1";
-    int puertoLocal = 8740; // cualquier puerto vacío para redireccionar
+    int puertoLocal = 8740; 
     int puertoRemoto = 3306;
-    public int puertoAsignado = 22; //para la conexión sql
+    public int puertoAsignado = 22; 
 
     public ConexionSsh() {
 

@@ -17,7 +17,7 @@ import java.util.Date;
 public class FechaActual {
 
     public static String getFechaKikote() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:SS.SSS");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
