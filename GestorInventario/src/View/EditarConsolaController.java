@@ -56,7 +56,7 @@ public class EditarConsolaController {
         precio.setText(String.valueOf(consola.getPrecio()));
         generacion.setText(consola.getGeneracion());
         stock.setText(String.valueOf(consola.getStock()));
-        fechaAlta.setText(consola.getFechaAlta().substring(0, 16));
+        fechaAlta.setText(consola.getFechaAlta());
         fechaUltimaAct.setText(FechaActual.getFechaKikote());
         //getImagen()??
     }
@@ -78,8 +78,8 @@ public class EditarConsolaController {
             consola.setPrecio(Double.valueOf(precio.getText()));
             consola.setGeneracion(generacion.getText());
             consola.setStock(Integer.valueOf(stock.getText()));
-            consola.setFechaAlta(FechaActual.getFechaKikote());
-            consola.setFechaUltimaAct(FechaActual.getFechaKikote());
+            consola.setFechaAlta(fechaAlta.getText());
+            consola.setFechaUltimaAct(fechaUltimaAct.getText());
             System.out.println(consola.getFechaUltimaActualizacion());
 
             guardarClicked = true; //Cambio valor booleano
@@ -147,10 +147,12 @@ public class EditarConsolaController {
         if (fechaAlta.getText() == null || fechaAlta.getText().length() == 0) {
             mensajeError += "Fecha de alta no válida.\n";
             System.out.println("error en fecha de alta");
+            System.out.println(fechaAlta.getText());
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaAlta.getText())) {
                 mensajeError += "Fecha de alta no válida (debe tener formato yyyy-MM-dd hh-mm-ss-ms).\n";
                 System.out.println("error en fecha alta");
+                System.out.println(fechaAlta.getText());
             }
         }
 
@@ -158,10 +160,12 @@ public class EditarConsolaController {
         if (fechaUltimaAct.getText() == null || fechaUltimaAct.getText().length() == 0) {
             mensajeError += "Fecha de nacimiento no válida.\n";
             System.out.println("error en fecha act");
+            System.out.println(fechaUltimaAct.getText());
         } else {
             if (!UtilidadDeFechas.fechaValida(fechaUltimaAct.getText())) {
                 mensajeError += "Fecha de alta no válida (debe tener formato dd/mm/yyyy).\n";
                 System.out.println("error en fecha act");
+            System.out.println(fechaUltimaAct.getText());
             }
         }
         

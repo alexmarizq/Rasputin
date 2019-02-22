@@ -17,7 +17,7 @@ public class Consola {
     private String fechaAlta; //fechaLanzamiento
     private String fechaUltimaAct;
     private Image imagen;
-    int cont = 30;
+    int cont = 50;
 
     public Consola() {
         this.id = cont;

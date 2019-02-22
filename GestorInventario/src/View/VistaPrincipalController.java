@@ -6,17 +6,28 @@
 package View;
 
 import Controller.Inventario;
+import Model.Documento;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author Rober
  */
 public class VistaPrincipalController {
+
     //Referencia a la clase principal
     private Inventario inventario;
 
@@ -64,7 +75,7 @@ public class VistaPrincipalController {
     //Abro un File Chooser para guardar como
     @FXML
     private void guardarComo() throws SQLException {
-        
+
         FileChooser fileChooser = new FileChooser();
 
         //Filtro para la extensión
@@ -86,12 +97,38 @@ public class VistaPrincipalController {
 
     //Acerca de
     @FXML
-    private void acercaDe() {
-        //Muestro alerta
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Acerca de");
-        alerta.setContentText("Autor: Marco Jakob\nWebsite: http://code.makery.ch\nAdaptación 2018: Jairo García Rincón");
-        alerta.showAndWait();
+    private void acercaDe() throws SQLException, IOException {
+        String rutaPdf = "src\\PDF\\Manual.pdf";
+        byte[] buffer = Files.readAllBytes(Paths.get(rutaPdf));
+        String ruta = "";
+        JFileChooser jfc = new JFileChooser();
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        jfc.setDialogTitle("Selecciona el destino");
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            
+            if ((jfc.showDialog(jfc, "Seleccionar")) == JFileChooser.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(null, "Operacion Cancelada");
+            } else {
+                File archivo = jfc.getSelectedFile();
+                ruta = archivo.getAbsolutePath();
+            }
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+            Logger.getLogger(VistaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            System.out.println(ex);
+            Logger.getLogger(VistaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            System.out.println(ex);
+            Logger.getLogger(VistaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            System.out.println(ex);
+            Logger.getLogger(VistaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Files.write(Paths.get(ruta, "Manual.pdf"), buffer);
+
     }
 
     //Salir
@@ -99,10 +136,10 @@ public class VistaPrincipalController {
     private void salir() {
         System.exit(0);
     }
-    
+
     //Gráfico
     @FXML
     private void grafico() {
-      inventario.crearGrafico();
+        inventario.crearGrafico();
     }
 }
